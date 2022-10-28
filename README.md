@@ -4,7 +4,7 @@
 
 <figure>
   <img src="./assets/email.png" alt="email"/>
-  <figcaption align="center"><i>Image par <a href="https://pixabay.com/fr/users/tumisu-148124/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2362038">Tumisu</a></i></figcaption>
+  <figcaption align="center"><i>Image by <a href="https://pixabay.com/fr/users/tumisu-148124/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2362038">Tumisu</a></i></figcaption>
 </figure>
 
 ## 🔥 Objective and motivation
