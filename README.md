@@ -26,7 +26,7 @@ Thinking and building such a system is a rewarding experience for those interest
 
 - Python development skill
 - [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) for text vectorization
-- [Linear Support vector machine](https://en.wikipedia.org/wiki/Support_vector_machine) (LinearSVL) and [Stochastic Gradient Descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) (SGD) for model training
+- [Linear Support vector machine](https://en.wikipedia.org/wiki/Support_vector_machine) (LinearSVC) and [Stochastic Gradient Descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) (SGD) for model training
 - API develpement to serve the model
 
 ## 🧬 Project structure
