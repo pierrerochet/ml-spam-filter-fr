@@ -29,7 +29,7 @@ Envisionning and building such a system is a rewarding experience for those inte
 - [Linear Support vector machine](https://en.wikipedia.org/wiki/Support_vector_machine) (LinearSVC) and [Stochastic Gradient Descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) (SGD) for model training
 - API development to serve the model
 
-## 🧬 Project structure
+## 🧩 Project structure
 
 ```
 ├── README.md
