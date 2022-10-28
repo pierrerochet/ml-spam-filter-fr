@@ -4,7 +4,7 @@
 
 <figure>
   <img src="./assets/email.png" alt="email"/>
-  <figcaption style="text-align: center;"><i>Image par <a href="https://pixabay.com/fr/users/tumisu-148124/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2362038">Tumisu</a></i></figcaption>
+  <figcaption align="center"><i>Image par <a href="https://pixabay.com/fr/users/tumisu-148124/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2362038">Tumisu</a></i></figcaption>
 </figure>
 
 ## 🔥 Objective and motivation
@@ -85,6 +85,7 @@ will return
 ```json
 {
   "is_spam": true,
+  "strength": 0.5,
   "confidence": 0.921,
   "input_text": "Vous avez gagnez un cadeau ! Recevez votre gain en cliquant ici !",
   "time": "2022-10-26 17:07:04"
@@ -119,11 +120,11 @@ Note - The **test data is 30%** of the total data.
 
 Here we tried to respond most frequently questions and justify choices made in the project.
 
-### _Why a spam filter for French language ?_ 🇫🇷
+### 👉 Why a spam filter for French language ? 🇫🇷
 
 Because French is a beautiful language 😉
 
-### _Why use a linear SVM and Stochastic Descent Gradient for model training ?_
+### 👉 Why use a linear SVM and Stochastic Descent Gradient for model training ?
 
 Historically, LinearSVM performs well on large datasets for relatively fast training time. It is therefore particularly suitable for textual data.
 
@@ -133,7 +134,7 @@ Using SGD for convergence allows us iterative learning. This strategy is useful 
 
 The performances are good enough not to consider heavier architectures based on neural networks. In addition, we have chosen to favor a light and easy to handle model.
 
-### _Why do a probability calibration? ?_
+### 👉 Why do a probability calibration ?
 
 > When performing classification you often want not only to predict the class label, but also obtain a probability of the respective label. This probability gives you some kind of confidence on the prediction. Some models can give you poor estimates of the class probabilities and some even do not support probability prediction (e.g., some instances of SGDClassifier). The calibration module allows you to better calibrate the probabilities of a given model, or to add support for probability prediction.
 >
@@ -141,7 +142,7 @@ The performances are good enough not to consider heavier architectures based on 
 
 Although not required, we want a **confidence score** in order to **manage the filter strength** in the service.
 
-### _Why use FastAPI to build the API ?_
+### 👉 Why use FastAPI to build the API ?
 
 > FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
 >
@@ -153,7 +154,7 @@ FastAPI is the python framework allowing to build API **fastest**.
 
 For building ML service in python it has become a standard choice in many projects.
 
-## How to improve the project ?
+## 🪄 How to improve the project ?
 
 First, the use of native French data could improve post-deployment spam detection.
 
@@ -163,6 +164,6 @@ Depending on the elements, other algorithms would be required for training. For 
 
 Combining these improvements could make a very powerful anti spam. But the project would also be much more difficult.
 
-# Author
+### Author
 
 [Pierre ROCHET](https://github.com/pierrerochet)
