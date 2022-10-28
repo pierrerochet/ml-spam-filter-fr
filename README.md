@@ -50,9 +50,9 @@ Envisionning and building such a system is a rewarding experience for those inte
 | data      | data used during training                                              |
 | notebooks | contains the notebooks for data manipulation and model training        |
 
-## 🔑 How use it
+## 🗝 How use it
 
-### 🔗 Install dependencies
+### ⛰ Install dependencies
 
 ```bash
 pip install -r requirements.txt
