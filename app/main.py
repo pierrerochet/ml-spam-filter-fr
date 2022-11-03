@@ -54,7 +54,9 @@ examples = {
 @app.on_event("startup")
 async def startup_event():
     root = os.path.dirname(os.path.abspath(__file__))
+    print(root)
     model_path = os.path.join(root, "ml_models/anti-spam-20221103-121137/model.pkl")
+    print(model_path)
     with open(model_path, "rb") as stream:
         app.state.model = pickle.load(stream)
 
@@ -90,5 +92,5 @@ if __name__ == "__main__":
         "main:app",
         host="0.0.0.0",
         port=8000,
-        # reload=True,
+        reload=True,
     )
