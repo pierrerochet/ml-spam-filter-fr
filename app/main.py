@@ -55,7 +55,7 @@ examples = {
 async def startup_event():
     root = os.path.dirname(os.path.abspath(__file__))
     print(root)
-    model_path = os.path.join(root, "ml_models/anti-spam-20221103-121137/model.pkl")
+    model_path = os.path.join(root, "ml_models/anti-spam-lastests/model.pkl")
     print(model_path)
     with open(model_path, "rb") as stream:
         app.state.model = pickle.load(stream)
