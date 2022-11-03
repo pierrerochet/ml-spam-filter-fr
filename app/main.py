@@ -1,11 +1,13 @@
+import os
 import time
 
-import joblib
-from fastapi import FastAPI, Body
+import pickle
+import uvicorn
+from fastapi import Body, FastAPI
 from pydantic import BaseModel, Field
 
 app = FastAPI(
-    title="API anti-spam",
+    title="API spam filter",
     description="Checks if an email is spam using its textual content",
     version="0.0.1",
     license_info={
@@ -19,7 +21,7 @@ class Input(BaseModel):
     text: str = Field(title="Textual content from email")
     strength: float = Field(
         title="Strength to apply to the filter",
-        default=0.5,
+        default=5.0,
         ge=0.0,
         le=10.0,
     )
@@ -51,8 +53,10 @@ examples = {
 
 @app.on_event("startup")
 async def startup_event():
-    model_path = "./app/ml_models/anti-spam-20221025-141032/model.joblib"
-    app.state.model = joblib.load(model_path)
+    root = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(root, "ml_models/anti-spam-20221103-121137/model.pkl")
+    with open(model_path, "rb") as stream:
+        app.state.model = pickle.load(stream)
 
 
 def predict_pred_score(text, strenght):
@@ -63,8 +67,13 @@ def predict_pred_score(text, strenght):
     return pred, score
 
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
+
 @app.post("/verify", response_model=Output)
-def read_root(input: Input = Body(examples=examples)):
+def verify(input: Input = Body(examples=examples)):
     pred, score = predict_pred_score(input.text, input.strength)
     return {
         "is_spam": bool(pred),
@@ -73,3 +82,13 @@ def read_root(input: Input = Body(examples=examples)):
         "input_text": input.text,
         "time": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
     }
+
+
+if __name__ == "__main__":
+
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        # reload=True,
+    )

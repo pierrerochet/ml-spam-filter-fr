@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.main import app
+from app_spam_filter_fr.main import app
 
 
 @pytest.fixture
