@@ -1,3 +1,6 @@
 .ipynb_checkpoints
 ml_models
 __pycache__
+app/vercel.json
+.pytest_cache
+.DS_Store

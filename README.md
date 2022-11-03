@@ -85,7 +85,7 @@ will return
 ```json
 {
   "is_spam": true,
-  "strength": 0.5,
+  "strength": 5.0,
   "confidence": 0.921,
   "input_text": "Vous avez gagné un cadeau ! Recevez votre gain en cliquant ici !",
   "time": "2022-10-26 17:07:04"
