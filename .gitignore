@@ -1,5 +1,6 @@
 .ipynb_checkpoints
-ml_models
+/app/ml_models/*
+!/app/ml_models/spam-filter-lastest
 __pycache__
 app/vercel.json
 .pytest_cache
