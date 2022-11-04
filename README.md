@@ -26,16 +26,27 @@ Envisionning and building such a system is a rewarding experience for those inte
 
 - Python development skill
 - [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) for text vectorization
-- [Linear Support vector machine](https://en.wikipedia.org/wiki/Support_vector_machine) (LinearSVC) and [Stochastic Gradient Descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) (SGD) for model training
+- [Linear Support vector machine](https://en.wikipedia.org/wiki/Support_vector_machine) and [Stochastic Gradient Descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) for model training
 - API development to serve the model
 
 ## 🧩 Project structure
 
 ```
+├── Makefile
 ├── README.md
 ├── app
+│   ├── Procfile
 │   ├── main.py
-│   └── ml_models
+│   ├── ml_models
+│   │   └── spam-filter-latest
+│   │       └── model.pkl
+│   ├── models.py
+│   ├── requirements.txt
+│   ├── runtime.txt
+│   ├── test_main.py
+│   └── utils.py
+├── assets
+│   └── email.png
 ├── data
 │   └── data-en-hi-de-fr.csv
 ├── notebooks
@@ -45,7 +56,7 @@ Envisionning and building such a system is a rewarding experience for those inte
 
 | Folder    | Description                                                            |
 | --------- | ---------------------------------------------------------------------- |
-| app       | api source code                                                        |
+| app       | api source code for deployment                                         |
 | ml_models | machine-learning models trained and loaded when the application starts |
 | data      | data used during training                                              |
 | notebooks | contains the notebooks for data manipulation and model training        |
