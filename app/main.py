@@ -1,10 +1,11 @@
 import os
-import time
-
 import pickle
+
 import uvicorn
 from fastapi import Body, FastAPI
-from pydantic import BaseModel, Field
+from models import Input, Output
+from utils import predict_pred_score
+from fastapi.responses import RedirectResponse
 
 app = FastAPI(
     title="API spam filter",
@@ -17,73 +18,44 @@ app = FastAPI(
 )
 
 
-class Input(BaseModel):
-    text: str = Field(title="Textual content from email")
-    strength: float = Field(
-        title="Strength to apply to the filter",
-        default=5.0,
-        ge=0.0,
-        le=10.0,
-    )
-
-
-class Output(BaseModel):
-    is_spam: bool
-    strength: float
-    confidence: float
-    input_text: str
-    time: str
-
-
-examples = {
-    "spam": {
-        "summary": "Spam example",
-        "description": "A text from a spam email",
-        "value": {
-            "text": "Vous avez gagnez un cadeau ! Recevez votre gain en cliquant ici !"
-        },
-    },
-    "legit": {
-        "summary": "Legit example",
-        "description": "A text from a legit email",
-        "value": {"text": "La réunion aura lieu demain à 14h"},
-    },
-}
-
-
 @app.on_event("startup")
 async def startup_event():
     root = os.path.dirname(os.path.abspath(__file__))
-    print(root)
     model_path = os.path.join(root, "ml_models/spam-filter-latest/model.pkl")
-    print(model_path)
     with open(model_path, "rb") as stream:
         app.state.model = pickle.load(stream)
 
 
-def predict_pred_score(text, strenght):
-    proba = app.state.model.predict_proba([text])[0]
-    lim = 1 - strenght / 10
-    pred = 1 if proba[1] > lim else 0
-    score = round(proba[pred], 3)
-    return pred, score
-
-
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root():
+    return RedirectResponse("/docs")
+
+
+@app.get("/health", include_in_schema=False)
+def health():
     return {"status": "ok"}
 
 
-@app.post("/verify", response_model=Output)
-def verify(input: Input = Body(examples=examples)):
-    pred, score = predict_pred_score(input.text, input.strength)
-    return {
-        "is_spam": bool(pred),
-        "confidence": score,
-        "strength": input.strength,
-        "input_text": input.text,
-        "time": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-    }
+@app.post("/inspect_email", response_model=Output)
+def check_email(
+    input: Input = Body(
+        examples={
+            "spam": {
+                "summary": "Spam example",
+                "description": "A text from a spam email",
+                "value": {
+                    "text": "Vous avez gagnez un cadeau ! Recevez votre gain en cliquant ici !"
+                },
+            },
+            "legit": {
+                "summary": "Legit example",
+                "description": "A text from a legit email",
+                "value": {"text": "La réunion aura lieu demain à 14h"},
+            },
+        }
+    )
+):
+    return predict_pred_score(app.state.model, input.text, input.strength)
 
 
 if __name__ == "__main__":
