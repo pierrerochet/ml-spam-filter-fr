@@ -12,11 +12,11 @@ def client():
 
 def test_detect_spam(client):
     json = {"text": "Vous avez gagné un cadeau, cliquez ici pour le recevoir !"}
-    response = client.post("/verify", json=json).json()
+    response = client.post("/check_email", json=json).json()
     assert response["is_spam"] == True
 
 
 def test_detect_ham(client):
     json = {"text": "On se retrouve à 14h devant chez moi"}
-    response = client.post("/verify", json=json).json()
+    response = client.post("/check_email", json=json).json()
     assert response["is_spam"] == False

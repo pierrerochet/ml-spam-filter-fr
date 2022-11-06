@@ -13,6 +13,6 @@ start:
 _heroku-deploy:
 	git subtree push --prefix app heroku master
 
-heroku-deploy: test _heroku-deploy
+heroku-deploy: tests _heroku-deploy
 	
 

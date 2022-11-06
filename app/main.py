@@ -3,9 +3,10 @@ import pickle
 
 import uvicorn
 from fastapi import Body, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from models import Input, Output
 from utils import predict_pred_score
-from fastapi.responses import RedirectResponse
 
 app = FastAPI(
     title="API spam filter",
@@ -15,6 +16,16 @@ app = FastAPI(
         "name": "Apache 2.0",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
+)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -36,7 +47,7 @@ def health():
     return {"status": "ok"}
 
 
-@app.post("/inspect_email", response_model=Output)
+@app.post("/check_email", response_model=Output)
 def check_email(
     input: Input = Body(
         examples={
