@@ -172,7 +172,3 @@ Another good option would be to find email dataset with additional elements such
 Depending on the data at our disposal, other algorithms would be required for training. For example, more complex methods based on neural networks should work better for inspecting attachements.
 
 Combining these improvements could make a very powerful anti spam. But the project would also be much more difficult to develop.
-
-### Author
-
-[Pierre ROCHET](https://github.com/pierrerochet)
